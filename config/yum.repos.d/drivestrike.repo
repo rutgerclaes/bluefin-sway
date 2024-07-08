@@ -1,0 +1,6 @@
+[drivestrike]
+name=DriveStrike Repository
+baseurl=https://app.drivestrike.com/static/yum
+enabled=1
+gpgcheck=1
+gpgkey=https://app.drivestrike.com/static/drivestrike.pubkey.txt
