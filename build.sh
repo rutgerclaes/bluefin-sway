@@ -13,10 +13,7 @@ RELEASE="$(rpm -E %fedora)"
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
-rpm-ostree install screen nc NetworkManager-tui pamtester vim zsh
-rpm-ostree install sway sway-config-fedora wl-clipboard blueman gammastep kitty mako network-manager-applet pavucontrol
-rpm-ostree install clamav clamav-update clamd drivestrike osquery
-rpm-ostree install libusb webkit2gtk3
+
 # this would install a package from rpmfusion
 # rpm-ostree install vlc
 

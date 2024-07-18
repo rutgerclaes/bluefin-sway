@@ -48,13 +48,21 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 ## make modifications desired in your image and install packages by modifying the build.sh script
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
 
-ADD config/yum.repos.d/drivestrike config/yum.repos.d/osquery /etc/yum.repos.d
+RUN mkdir -p /var/lib/alternatives
 
-COPY build.sh /tmp/build.sh
+ADD config/yum.repos.d/*.repo /etc/yum.repos.d
 
-RUN mkdir -p /var/lib/alternatives && \
-    /tmp/build.sh && \
-    ostree container commit
+RUN rpm-ostree install screen nc NetworkManager-tui pamtester vim zsh
+RUN rpm-ostree install sway sway-config-fedora wl-clipboard blueman gammastep kitty mako network-manager-applet pavucontrol
+RUN rpm-ostree install clamav clamav-update clamd
+RUN rpm-ostree install libusb webkit2gtk3
+# RUN rpm-ostree install osquery
+RUN rpm-ostree install drivestrike
+
+RUN systemctl enable podman.socket
+
+RUN ostree container commit
+
 ## NOTES:
 # - /var/lib/alternatives is required to prevent failure with some RPM installs
 # - All RUN commands must end with ostree container commit
